@@ -13,6 +13,20 @@
   </head>
 
   <body>
+
+    <div>
+      <h1 class="text-center">Board</h1>
+      <div id="board">
+        <!-- Aqui serão inseridos os items da GameBoard-->
+      </div>
+      <div>
+        <select id="boardsize" onchange="changeBoard()">
+          <option value="0">16 x 16</option>
+          <option value="1">24 x 24</option>
+          <option value="2">32 x 32</option>
+        </select>
+      </div>
+    </div>
     <h1 class="text-center">Data Structures</h1>
 
     <div class="container" id="container">
@@ -83,9 +97,12 @@
       </div>
     </div>
 
+    <script src="src/board.js"></script>
+    <script src="src/snake.js"></script>
     <script src="src/stack/stack-data-structure.js"></script>
     <script src="src/queue/queue-data-structure.js"></script>
 
+    <script src="src/board-dom.js"></script>
     <script src="src/stack/stack-dom.js"></script>
     <script src="src/queue/queue-dom.js"></script>
   </body>
