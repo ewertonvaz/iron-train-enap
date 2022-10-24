@@ -10,11 +10,11 @@ class Snake {
     }
 
     generate(){
-        this.snakeControl.push(this.snakeTail);
+        this.snakeControl.push(this.snakeHead);
         for(let i = 0; i < this.size - 2; i++){
             this.snakeControl.push(this.snakeBody);
         }
-        this.snakeControl.push(this.snakeHead);
+        this.snakeControl.push(this.snakeTail);
     }
 
     getSnake() {

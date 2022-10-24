@@ -14,12 +14,11 @@
 
   <body>
 
-    <div>
-      <h1 class="text-center">Board</h1>
+    <div id="game">
       <div id="board">
         <!-- Aqui serão inseridos os items da GameBoard-->
       </div>
-      <div>
+      <div id="painel">
         <select id="boardsize" onchange="changeBoard()">
           <option value="0">16 x 16</option>
           <option value="1">24 x 24</option>
@@ -27,83 +26,10 @@
         </select>
       </div>
     </div>
-    <h1 class="text-center">Data Structures</h1>
-
-    <div class="container" id="container">
-      <div class="row">
-        <div class="col-sm-4">
-          <h2>Stack</h2>
-          <div class="form-group">
-            <label for=""></label>
-            <input
-              class="form-control"
-              id="stack-input"
-              placeholder="Add element to the stack"
-            />
-          </div>
-          <button
-            id="add-stack"
-            type="button"
-            class="btn btn-primary btn-block"
-          >
-            Add to stack
-          </button>
-          <button
-            id="take-stack"
-            type="button"
-            class="btn btn-danger btn-block"
-          >
-            Remove from stack
-          </button>
-          <div class="stack-container" id="stack-container">
-            <div class="warning-top alert alert-danger"></div>
-            <ul id="stack-list" class="list-stack"></ul>
-            <div class="warning-bottom alert alert-danger"></div>
-          </div>
-        </div>
-        <div class="col-sm-1"></div>
-
-        <div class="col-sm-7">
-          <h2>Queue</h2>
-          <div class="form-group">
-            <label for=""></label>
-            <input
-              class="form-control queue-input"
-              id="queue-input"
-              placeholder="Add element to the queue"
-            />
-          </div>
-          <button
-            id="add-queue"
-            type="button"
-            class="btn btn-primary btn-block btn-add-queue"
-          >
-            Add to queue
-          </button>
-          <button
-            id="take-queue"
-            type="button"
-            class="btn btn-danger btn-block btn-take-dequeue"
-          >
-            Remove from queue
-          </button>
-
-          <div class="stack-container" id="queue-container">
-            <div class="warning-top alert alert-danger"></div>
-            <ul id="queue-list" class="list-queue"></ul>
-            <div class="warning-bottom alert alert-danger"></div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <script src="src/board.js"></script>
     <script src="src/snake.js"></script>
-    <script src="src/stack/stack-data-structure.js"></script>
-    <script src="src/queue/queue-data-structure.js"></script>
 
     <script src="src/board-dom.js"></script>
-    <script src="src/stack/stack-dom.js"></script>
-    <script src="src/queue/queue-dom.js"></script>
   </body>
 </html>
