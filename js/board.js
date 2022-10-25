@@ -29,4 +29,4 @@ class Board {
     moveHit(){}
 }
 
-module.exports = Board;
+// module.exports = Board;

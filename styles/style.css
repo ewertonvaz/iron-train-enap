@@ -36,3 +36,39 @@
 #painel {
   padding: 4px;
 }
+
+#botoes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* width: 128px; */
+  /* border: 8px solid blue; */
+  /* gap: 10px; */
+  /* grid-auto-rows: minmax(100px, auto); */
+}
+
+#botoes div:nth-child(even) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(0,0,0,.2);
+}
+
+#botoes div:nth-child(2) svg{
+  width: 100%;
+  padding: 0;
+  transform: rotate(-90deg);
+}
+
+#botoes div:nth-child(4) svg{
+  width: 100%;
+  padding: 0;
+  transform: rotate(180deg);
+}
+
+#botoes div:nth-child(8) svg{
+  width: 100%;
+  padding: 0;
+  transform: rotate(90deg);
+}
