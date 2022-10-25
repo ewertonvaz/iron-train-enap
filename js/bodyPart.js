@@ -1,7 +1,7 @@
 class BodyPart {
     constructor(x, y) {
         this.actualPos = [x, y];
-        this.previousPos = [x, y];
+        this.previousPos = [x, y - 1];
     }
 
     draw(){
@@ -22,6 +22,15 @@ class Tail extends BodyPart {
     constructor(x, y) {
         super(x, y);
         this.text = "T";
+    }
+
+    draw(){
+        super.draw();
+        if (!(this.actualPos[0] === this.previousPos[0] && this.actualPos[1] === this.previousPos[1])){
+            let previous = document.getElementById(`${this.previousPos[0]}_${this.previousPos[1]}`);
+            previous.innerHTML = "" ;
+            previous.className = "square"
+        }
     }
 }
 

@@ -2,13 +2,10 @@
 // const Snake = require("./snake");
 
 const board = new Board(16, 16);
-
 x = Math.round(board.width / 2);
 y = Math.round(board.height / 2);
-let snake = new Snake(x, y);
-
+const snake = new Snake(x, y);
 const gameBoard = document.getElementById('board');
-
 
 function renderBoard(){
     gameBoard.innerHTML = ""; //Remove todas as div child
@@ -28,10 +25,7 @@ function renderBoard(){
 }
 
 function renderSnake(snake){
-    for (let i = 0; i < snake.size; i++){
-        //console.log(i, snake.size, snake.getSnake()[i]);
-        snake.getSnake()[i].draw();
-    }
+    snake.render();
 }
 
 function changeBoard(){
@@ -50,13 +44,22 @@ function changeBoard(){
             board.changeDimensions(8, 8);
             break;
     }
-    renderBoard();
 
     x = Math.round(board.width / 2);
     y = Math.round(board.height / 2);
-    snake = new Snake(x, y);
-    renderSnake(snake);
+    snake.changePosition(x, y);
+
+    renderBoard();
+    snake.render();
+}
+
+function startGame(){
+    snake.start();
+}
+
+function stopGame(){
+    snake.stop();
 }
 
 renderBoard();
-renderSnake(snake, board);
+snake.render();
