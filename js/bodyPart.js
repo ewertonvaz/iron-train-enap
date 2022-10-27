@@ -3,35 +3,108 @@ class BodyPart {
         this.actualPos = [x, y];
         this.previousPos = [x, y - 1];
         this.background = "./assets/img/segment.png";
+        this.actualDirection = "right";
+        this.previousDirection = "right";
         this.position = null;
+        this.corner = 'none';
     }
 
-    draw(direction){
+    getCorner() {
+        if (this.actualDirection === this.previousDirection){
+            return 'none';
+        }
+        switch (this.actualDirection) {
+            case 'up' :
+                switch (this.previousDirection) {
+                    case 'left':
+                        return 'up-left';
+                    case 'right':
+                        return 'up-right';
+                }
+                break;
+            case 'down' :
+                switch (this.previousDirection){
+                    case 'left':
+                        return 'down-left';
+                    case 'right':
+                        return 'down-right';
+                }
+                break;
+            case 'left' :
+                switch (this.previousDirection){
+                    case 'up':
+                        return 'left-up';
+                    case 'down':
+                        return 'left-down';
+                }
+                break;
+            case 'right' :
+                switch (this.previousDirection){
+                    case 'up':
+                        return 'right-up';
+                    case 'down':
+                        return 'right-down';
+                }
+                break;
+        }
+    }
+
+    changeDirection(){
+        switch (this.actualDirection){
+            case "up":
+                this.position.querySelector('img').style.transform = "rotate(-90deg)";
+                break;
+            case "down":
+                this.position.querySelector('img').style.transform = "rotate(90deg)";
+                break;
+            case "left":
+                this.position.querySelector('img').style.transform = "scaleX(-1)";
+                break;
+            case "right":
+                this.position.querySelector('img').style.transform = "rotate(0deg)";
+                break;
+            default:
+                this.direction = "unknown";
+                break;
+        }
+    }
+
+    draw(){
         this.position = document.getElementById(`${this.actualPos[0]}_${this.actualPos[1]}`);
         //this.position.innerHTML = this.text ;
         this.position.className = "snake-part";
         this.position.querySelector('img').setAttribute("src", `${this.background}`);
-        this.changeDirection(direction);
+        this.changeDirection();
+        if (this.corner !== 'none') {
+            this.drawCorner(this.corner);
+        }
     }
 
-    changeDirection(direction){
-        switch (direction){
-            case "up":
-                this.direction = "up";
-                this.position.querySelector('img').style.transform = "rotate(-90deg)";
+    drawCorner(corner){
+        switch (corner){
+            case "up-right":
+                this.position.querySelector('img').style.transform = "rotate(345deg)";
                 break;
-            case "down":
-                this.direction = "down";
-                this.position.querySelector('img').style.transform = "rotate(90deg)";
+            case "up-left":
+                this.position.querySelector('img').style.transform = "rotate(252deg)";
                 break;
-            case "left":
-                this.direction = "left";
-                console.log('mudei left');
-                this.position.querySelector('img').style.transform = "scaleX(-1)";
+            case "down-right":
+                this.position.querySelector('img').style.transform = "rotate(31deg)";
                 break;
-            case "right":
-                this.direction = "right";
-                this.position.querySelector('img').style.transform = "rotate(0deg)";
+            case "down-left":
+                this.position.querySelector('img').style.transform = "rotate(340deg)";
+                break;
+            case "left-up":
+                this.position.querySelector('img').style.transform = "rotate(17deg)";
+                break;
+            case "left-down":
+                this.position.querySelector('img').style.transform = "rotate(125deg)";
+                break;
+            case "right-up":
+                this.position.querySelector('img').style.transform = "rotate(327deg)";
+                break;
+            case "right-down":
+                this.position.querySelector('img').style.transform = "rotate(62deg)";
                 break;
             default:
                 this.direction = "unknown";

@@ -70,6 +70,7 @@ class Snake {
         //1. Guarda as posições anteriores
         for (let i = 0; i < this.size(); i++) {
             let clonePos = [...this.snakeControl[i].actualPos]
+            this.snakeControl[i].previousDirection = this.snakeControl[i].actualDirection;
             this.snakeControl[i].previousPos = clonePos;
         }
         //1.
@@ -89,11 +90,14 @@ class Snake {
                 this.snakeControl[this.size() - 1].actualPos[0]++;
                 break;
         }
+        this.snakeControl[this.size() - 1].actualDirection = this.direction;
         //2.
 
         //3. Atualiza a posição dos demais itens
         for (let i = this.size() - 2;  i >= 0; i--) {
             this.snakeControl[i].actualPos = this.snakeControl[i+1].previousPos;
+            this.snakeControl[i].actualDirection = this.snakeControl[i+1].previousDirection;
+            this.snakeControl[i].corner = this.snakeControl[i+1].getCorner();
         }
         //3.
         //console.log(this.snakeControl);
