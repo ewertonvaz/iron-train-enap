@@ -1,6 +1,6 @@
 #board {
   display: grid;
-  width: 128px;
+  width: 150px;
   grid-template-columns: repeat(2, 1fr);
   border: 8px solid blue;
   /* gap: 10px; */
@@ -8,8 +8,8 @@
 }
 
 .square {
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border: 1px solid lightgray;
   font-size: 8px;
 }
@@ -18,13 +18,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 22px;
-  height: 22px;
-  border: 1px solid black;
+  width: 28px;
+  height: 28px;
+  border: none;
   font-size: 8px;
   color: white;
-  background-color: black;
+  background-color: transparent;
   font-weight: bold;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #game {

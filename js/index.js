@@ -10,16 +10,20 @@ const gameBoard = document.getElementById('board');
 function renderBoard(){
     gameBoard.innerHTML = ""; //Remove todas as div child
     gameBoard.style.gridTemplateColumns = `repeat(${board.width}, 1fr)`;
-    gameBoard.style.width = `${board.width * 22 + 16}px`;
+    gameBoard.style.width = `${board.width * 28 + 16}px`;
     for (let i = 0; i < board.width; i++){
         for (let j = 0; j < board.height; j++){
             let item = document.createElement('div');
             item.className = 'square';
             item.id = `${i}_${j}`;
             let span = document.createElement('span');
+            let img = document.createElement('img');
+            img.className = "fundo";
+            img.style.width = "100%";
+            item.appendChild(img);
             span.title = board.getBoard()[i][j];
             span.appendChild(item);
-            gameBoard.appendChild(span);        
+            gameBoard.appendChild(span);
         }
     }
 }
