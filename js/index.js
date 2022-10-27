@@ -6,6 +6,10 @@ x = Math.round(board.width / 2);
 y = Math.round(board.height / 2);
 const snake = new Snake(x, y);
 const gameBoard = document.getElementById('board');
+const elements = [
+    new Element(12, 12),
+    new Element(4, 4)
+];
 
 function renderBoard(){
     gameBoard.innerHTML = ""; //Remove todas as div child
@@ -26,6 +30,12 @@ function renderBoard(){
             gameBoard.appendChild(span);
         }
     }
+}
+
+function renderElements(){
+    elements.forEach(el => {
+        el.draw();
+    });
 }
 
 function renderSnake(snake){
@@ -54,6 +64,7 @@ function changeBoard(){
     snake.changePosition(x, y);
 
     renderBoard();
+    renderElements();
     snake.render();
 }
 
@@ -66,4 +77,5 @@ function stopGame(){
 }
 
 renderBoard();
+renderElements();
 snake.render();
