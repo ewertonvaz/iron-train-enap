@@ -101,7 +101,7 @@ class Snake {
 
     render(){
         for (let i = this.snakeControl.length - 1; i >= 0; i--){
-           this.snakeControl[i].draw();
+           this.snakeControl[i].draw(this.direction);
         }
     }
 

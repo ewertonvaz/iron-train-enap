@@ -6,29 +6,32 @@ class BodyPart {
         this.position = null;
     }
 
-    draw(){
+    draw(direction){
         this.position = document.getElementById(`${this.actualPos[0]}_${this.actualPos[1]}`);
         //this.position.innerHTML = this.text ;
         this.position.className = "snake-part";
         this.position.querySelector('img').setAttribute("src", `${this.background}`);
-        this.changeDirection("up");
+        this.changeDirection(direction);
     }
 
     changeDirection(direction){
         switch (direction){
             case "up":
                 this.direction = "up";
-                console.log(this.position);
-                this.position.querySelector('img').style.transform = "rotate(45deg)";
+                this.position.querySelector('img').style.transform = "rotate(-90deg)";
                 break;
             case "down":
                 this.direction = "down";
+                this.position.querySelector('img').style.transform = "rotate(90deg)";
                 break;
             case "left":
                 this.direction = "left";
+                console.log('mudei left');
+                this.position.querySelector('img').style.transform = "scaleX(-1)";
                 break;
             case "right":
                 this.direction = "right";
+                this.position.querySelector('img').style.transform = "rotate(0deg)";
                 break;
             default:
                 this.direction = "unknown";
@@ -56,9 +59,9 @@ class Tail extends BodyPart {
         super.draw();
         if (!(this.actualPos[0] === this.previousPos[0] && this.actualPos[1] === this.previousPos[1])){
             let previous = document.getElementById(`${this.previousPos[0]}_${this.previousPos[1]}`);
-            previous.innerHTML = "" ;
+            //previous.innerHTML = "" ;
             previous.className = "square";
-            previous.style.backgroundImage="";
+            previous.querySelector('img').setAttribute("src", "");
         }
     }
 }
