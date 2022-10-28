@@ -1,3 +1,5 @@
+@import './gamewindows.css';
+
 #board {
   display: grid;
   width: 150px;
