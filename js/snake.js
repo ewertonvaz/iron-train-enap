@@ -3,11 +3,14 @@
 
 // const { Head, Tail, Segment } = require("./bodyPart");
 
+const SPEED_INCREMENT = 100;
+const MAX_SPEED = 100;
+
 class Snake {
     constructor(x, y){    
         this.direction = "right";
         this.snakeControl = [];
-        this.speed = 2;
+        this.speed = 2000;
         this.generate(x, y);
     }
 
@@ -32,6 +35,17 @@ class Snake {
         this.snakeControl.splice(1, 0, newItem);
         this.snakeControl[0].previousPos = tailActual;
         //this.snakeControl[0].actualPos = 
+    }
+
+    speedKm(){
+        return (40000/this.speed).toFixed(2);
+    }
+
+    increaseSpeed(){
+        this.stop();
+        this.speed = this.speed > MAX_SPEED ? this.speed - SPEED_INCREMENT : MAX_SPEED;
+        document.querySelector('div.pontuacao p#speed span').innerText = this.speedKm();
+        this.start();
     }
 
     changePosition(x, y) {
@@ -110,7 +124,6 @@ class Snake {
     }
 
     start(){
-        let interval = this.speed * 1000;
         this.snakeMoving = setInterval( () => {
             try {
                 this.move();
@@ -119,11 +132,12 @@ class Snake {
                 console.log(e);
                 this.stop();
             }
-        }, interval );
+        }, this.speed );
+        document.querySelector('div.pontuacao p#speed span').innerText = this.speedKm();
     }
 
     stop(){
-        clearInterval(this.snakeMoving)
+        clearInterval(this.snakeMoving);
     }
 }
 

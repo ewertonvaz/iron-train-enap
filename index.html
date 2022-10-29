@@ -3,12 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>Project 1: Snake Game</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
     <link rel="stylesheet" href="styles/style.css" />
   </head>
 
@@ -19,6 +13,11 @@
         <!-- Aqui serão inseridos os items da GameBoard-->
       </div>
       <div id="painel">
+        <div class="pontuacao">
+          <p>Pontos: <span>0</span></p>
+          <p>Nível: <span>0</span></p>
+          <p id="speed">Velocidade: <span>0</span> Km/h</p>
+        </div>
         <select id="boardsize" onchange="changeBoard()">
           <option value="0">16 x 16</option>
           <option value="1">24 x 24</option>
@@ -51,7 +50,7 @@
           <button onclick="startGame()">Start</button>
           <button onclick="stopGame()">Stop</button>
           <button onclick="snake.grow()">Grow up</button>
-          <button onclick="snake.speedUp()">Speed up</button>
+          <button onclick="snake.increaseSpeed()">Speed up</button>
         </div>
       </div>
     </div>

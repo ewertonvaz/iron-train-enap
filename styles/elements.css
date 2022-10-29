@@ -1,0 +1,21 @@
+.element-draw{
+    display: flex;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background: url("../assets/img/soil.png");
+}
+
+.snake-part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: none;
+    font-size: 8px;
+    color: white;
+    font-weight: bold;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background: url("../assets/img/soil.png");
+}
+  

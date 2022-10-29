@@ -1,8 +1,15 @@
 @import './gamewindows.css';
+@import './elements.css';
+
+/*reset do CSS */
+* {
+  margin: 0;
+  padding: 0;
+}
 
 #board {
   display: grid;
-  width: 150px;
+  /* width: 150px; */
   grid-template-columns: repeat(2, 1fr);
   border: 8px solid blue;
   /* gap: 10px; */
@@ -10,25 +17,15 @@
 }
 
 .square {
-  width: 28px;
-  height: 28px;
-  border: 1px solid lightgray;
+  /* width: 28px;
+  height: 28px; */
+  /* border: 0px solid lightgray; */
+  /* padding: 1px; */
   font-size: 8px;
-}
-
-.snake-part {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 28px;
-  height: 28px;
-  border: none;
-  font-size: 8px;
-  color: white;
-  background-color: transparent;
-  font-weight: bold;
-  background-size: cover;
+  background: url("../assets/img/soil.png");
   background-repeat: no-repeat;
+  background-size: auto;
+  /* filter: opacity(25%); */
 }
 
 #game {

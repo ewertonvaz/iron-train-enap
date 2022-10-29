@@ -2,44 +2,16 @@
 // const Snake = require("./snake");
 
 const board = new Board(16, 16);
-x = Math.round(board.width / 2);
-y = Math.round(board.height / 2);
-const snake = new Snake(x, y);
-const gameBoard = document.getElementById('board');
+const snake = new Snake(Math.round(board.width / 2), Math.round(board.height / 2));
 const elements = [
     new Element(12, 12),
     new Element(4, 4)
 ];
 
-function renderBoard(){
-    gameBoard.innerHTML = ""; //Remove todas as div child
-    gameBoard.style.gridTemplateColumns = `repeat(${board.width}, 1fr)`;
-    gameBoard.style.width = `${board.width * 28 + 16}px`;
-    for (let i = 0; i < board.width; i++){
-        for (let j = 0; j < board.height; j++){
-            let item = document.createElement('div');
-            item.className = 'square';
-            item.id = `${i}_${j}`;
-            let span = document.createElement('span');
-            let img = document.createElement('img');
-            img.className = "fundo";
-            img.style.width = "100%";
-            item.appendChild(img);
-            span.title = board.getBoard()[i][j];
-            span.appendChild(item);
-            gameBoard.appendChild(span);
-        }
-    }
-}
-
 function renderElements(){
     elements.forEach(el => {
         el.draw();
     });
-}
-
-function renderSnake(snake){
-    snake.render();
 }
 
 function changeBoard(){
@@ -59,11 +31,9 @@ function changeBoard(){
             break;
     }
 
-    x = Math.round(board.width / 2);
-    y = Math.round(board.height / 2);
-    snake.changePosition(x, y);
+    snake.changePosition(Math.round(board.width / 2), Math.round(board.height / 2));
 
-    renderBoard();
+    board.render();
     renderElements();
     snake.render();
 }
@@ -76,6 +46,6 @@ function stopGame(){
     snake.stop();
 }
 
-renderBoard();
+board.render();
 renderElements();
 snake.render();
