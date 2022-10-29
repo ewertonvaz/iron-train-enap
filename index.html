@@ -18,11 +18,6 @@
           <p>Nível: <span>0</span></p>
           <p id="speed">Velocidade: <span>0</span> Km/h</p>
         </div>
-        <select id="boardsize" onchange="changeBoard()">
-          <option value="0">16 x 16</option>
-          <option value="1">24 x 24</option>
-          <option value="2">32 x 32</option>
-        </select>
         <div id="botoes">
           <div class="botao"></div>
           <div class="botao" onclick="snake.changeDirection('up')"><svg fill="none" viewBox="2 2 20 20" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -47,8 +42,7 @@
           <div class="botao"></div>
         </div>
         <div>
-          <button onclick="startGame()">Start</button>
-          <button onclick="stopGame()">Stop</button>
+          <button id="button-pause" onclick="pauseGame()">pause</button>
           <button onclick="snake.grow()">Grow up</button>
           <button onclick="snake.increaseSpeed()">Speed up</button>
         </div>
@@ -56,8 +50,23 @@
     </div>
     
     <div id="select-screen" class="modal-wrapper">
+      <!-- As telas do jogo vão ser inseridas pelo JS na classe abaixo-->
       <div class="modal-content">
-
+        <div>
+          <h1>Iron Train</h1>
+          <h2>Welcome to the Iron train, wanna go for a ride?</2>
+        </div>
+        <div>
+          <p>First select your board size</p>
+          <select id="boardsize" onchange="changeBoard()">
+            <option value="0">8 x 8</option>
+            <option value="1">16 x 16</option>
+            <option value="2">24 x 24</option>
+          </select>
+        </div>
+        <div>
+          <button onclick="startGame()">Start</button>
+        </div>
       </div>
     </div>
 

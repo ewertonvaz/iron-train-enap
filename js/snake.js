@@ -30,7 +30,7 @@ class Snake {
         let newItem = new Segment(0, 0);
         newItem.actualPos = tailActual;
         newItem.previousPos = tailPrevious;
-        console.log(newItem);
+        // console.log(newItem);
         //Insere um item antes da cauda (Tail)
         this.snakeControl.splice(1, 0, newItem);
         this.snakeControl[0].previousPos = tailActual;
@@ -43,7 +43,15 @@ class Snake {
 
     increaseSpeed(){
         this.stop();
-        this.speed = this.speed > MAX_SPEED ? this.speed - SPEED_INCREMENT : MAX_SPEED;
+        // Calcula nova velocidade
+        if (this.speed > MAX_SPEED * 4 ) {
+            this.speed -= SPEED_INCREMENT;
+        } else if (this.speed > MAX_SPEED) {
+             this.speed -=  SPEED_INCREMENT / 4;
+        } else {
+            this.speed = MAX_SPEED;
+        }
+
         document.querySelector('div.pontuacao p#speed span').innerText = this.speedKm();
         this.start();
     }

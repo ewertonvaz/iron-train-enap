@@ -1,11 +1,12 @@
 // const Board = require("./board");
 // const Snake = require("./snake");
+let gameStatus = "waiting";
 
-const board = new Board(16, 16);
+const board = new Board(8, 8);
 const snake = new Snake(Math.round(board.width / 2), Math.round(board.height / 2));
 const elements = [
-    new Element(12, 12),
-    new Element(4, 4)
+    new Element(6, 6),
+    new Element(2, 2)
 ];
 
 function renderElements(){
@@ -18,13 +19,13 @@ function changeBoard(){
     let value = document.getElementById('boardsize').value;
     switch (value){
         case "0":
-            board.changeDimensions(16, 16);
+            board.changeDimensions(8, 8);
             break;
         case "1":
-            board.changeDimensions(24, 24);
+            board.changeDimensions(16, 16);
             break;
         case "2":
-            board.changeDimensions(32, 32);
+            board.changeDimensions(24, 24);
             break;
         default:
             board.changeDimensions(8, 8);
@@ -39,11 +40,20 @@ function changeBoard(){
 }
 
 function startGame(){
+    document.querySelector('.modal-wrapper').style.display = 'none';
     snake.start();
 }
 
-function stopGame(){
-    snake.stop();
+function pauseGame(){
+    if (gameStatus !== "paused"){
+        document.getElementById("button-pause").innerText = "play"
+        gameStatus = "paused";
+        snake.stop();
+    } else {
+        document.getElementById("button-pause").innerText = "pause"
+        gameStatus = "running";
+        snake.start();
+    }
 }
 
 board.render();

@@ -1,5 +1,5 @@
 .modal-wrapper {
-    display: none;
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,8 +11,19 @@
 
 .modal-content {
     display: flex;
+    flex-direction: column;
     margin: 10% auto;
     width: 80%;
     background-color: white;
     z-index: 20;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow:  9px 9px 4px 0px #76717182;
+    padding: 10px;
+}
+
+#button-pause{
+    padding: 16px;
+    background-color: aquamarine;
+    text-transform: uppercase;
 }
