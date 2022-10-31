@@ -27,7 +27,7 @@ function collisionBorder(nextPos){
 
 function collisionItens(nextPos){
     itens.forEach( (el, index) => {
-        if( el.x === nextPos[0] && el.y === nextPos[1]) {
+        if( el.x === snake.getHead().actualPos[0] && el.y === snake.getHead().actualPos[1]) {
             score += el.points;
             itens.splice(index, 1);
             renderScore();
@@ -71,7 +71,17 @@ function renderItens(){
 }
 
 function renderScore() {
-    document.querySelector('#score span').innerText = convertScore(score);
+    let strScore = score > 0 ? score.toFixed(0) : "0";
+    let length = strScore.length;
+    console.log(strScore, strScore.length);
+    if (strScore.length === SCORE_DIGITS){
+        return strScore;
+    }
+    for (let i = 0; i <= SCORE_DIGITS - length; i++){
+        strScore = '0' + strScore;
+    }
+    console.log(strScore, strScore.length);
+    document.querySelector('#score span').innerText = strScore;
 }
 
 function renderSpeed(speed) {
@@ -80,17 +90,6 @@ function renderSpeed(speed) {
 
 function speedToKm(speed){
     return (40000/speed).toFixed(2);
-}
-
-function convertScore(score){
-    let strScore = score.toFixed(0);
-    if (strScore.length === SCORE_DIGITS){
-        return strScore;
-    }
-    for (let i = 0; i < strScore.length === SCORE_DIGITS; i++){
-        strScore += '0';
-    }
-    return strScore;
 }
 
 function changeBoard(){
@@ -115,6 +114,7 @@ function changeBoard(){
     board.render();
     renderItens();
     renderSpeed(snake.speed);
+    renderScore();
     snake.render();
 }
 
@@ -151,4 +151,5 @@ function pauseGame(){
 board.render();
 renderItens();
 renderSpeed(snake.speed);
+renderScore();
 snake.render();

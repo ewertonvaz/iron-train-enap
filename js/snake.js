@@ -165,6 +165,10 @@ class Snake {
     stop(){
         clearInterval(this.snakeMoving);
     }
+
+    getHead(){
+        return this.snakeControl[this.size() - 1];
+    }
 }
 
 // module.exports = Snake;
