@@ -145,8 +145,8 @@ class Snake {
     }
 
     crash(){
-        this.snakeControl[this.size() - 1].background = '../assets/img/crash.png';
-        this.snakeControl[this.size() - 1].draw();
+        this.getHead().background = './assets/img/crash.png';
+        this.getHead().draw();
     }
 
     start(){
