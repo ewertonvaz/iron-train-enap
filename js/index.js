@@ -1,16 +1,41 @@
 // const Board = require("./board");
 // const Snake = require("./snake");
+const SCORE_DIGITS = 4;
 let gameStatus = "waiting";
 var collisionTimerId = null;
+let score = 0;
 
 const board = new Board(8, 8);
 const snake = new Snake(Math.round(board.width / 2), Math.round(board.height / 2));
-const elements = [
-    new Element(6, 6),
-    new Element(2, 2)
+const itens = [
+    new Item(6, 6),
+    new Item(2, 2)
 ];
-function collisionSelf(){
-    let nextPos = snake.nextMove();
+
+
+function collisionBorder(nextPos){
+    if( 
+        nextPos[0] === -1 ||
+        nextPos[0] === board.height ||
+        nextPos[1] === -1 ||
+        nextPos[1] === board.width
+    ) 
+    {
+        throw new Error('Collision');
+    }
+}
+
+function collisionItens(nextPos){
+    itens.forEach( (el, index) => {
+        if( el.x === nextPos[0] && el.y === nextPos[1]) {
+            score += el.points;
+            itens.splice(index, 1);
+            renderScore();
+        }
+    });
+}
+
+function collisionSelf(nextPos){
     snake.snakeControl.forEach( (el) => {
         if( el.actualPos[0] === nextPos[0] && el.actualPos[1] === nextPos[1]) {
             throw new Error('Collision');
@@ -19,8 +44,11 @@ function collisionSelf(){
 }
 
 function detectCollision(){
+    let nextPos = snake.nextMove();
     try {
-        collisionSelf();
+        collisionSelf(nextPos);
+        collisionBorder(nextPos);
+        collisionItens(nextPos);
     } catch (e) {
         console.log(e);
         endGame();
@@ -36,10 +64,14 @@ function speedUp(){
     }, snake.speed - 100);
 }
 
-function renderElements(){
-    elements.forEach(el => {
+function renderItens(){
+    itens.forEach(el => {
         el.draw();
     });
+}
+
+function renderScore() {
+    document.querySelector('#score span').innerText = convertScore(score);
 }
 
 function renderSpeed(speed) {
@@ -48,6 +80,17 @@ function renderSpeed(speed) {
 
 function speedToKm(speed){
     return (40000/speed).toFixed(2);
+}
+
+function convertScore(score){
+    let strScore = score.toFixed(0);
+    if (strScore.length === SCORE_DIGITS){
+        return strScore;
+    }
+    for (let i = 0; i < strScore.length === SCORE_DIGITS; i++){
+        strScore += '0';
+    }
+    return strScore;
 }
 
 function changeBoard(){
@@ -70,7 +113,7 @@ function changeBoard(){
     snake.changePosition(Math.round(board.width / 2), Math.round(board.height / 2));
 
     board.render();
-    renderElements();
+    renderItens();
     renderSpeed(snake.speed);
     snake.render();
 }
@@ -106,6 +149,6 @@ function pauseGame(){
 }
 
 board.render();
-renderElements();
+renderItens();
 renderSpeed(snake.speed);
 snake.render();

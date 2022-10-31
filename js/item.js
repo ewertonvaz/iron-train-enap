@@ -1,9 +1,10 @@
-class Element {
+class Item {
     constructor(x, y) {
         this.x = x;
         this.y = y;
         this.position = "";
         this.background = "./assets/img/coin.svg";
+        this.points = 10;
     }
 
     draw(){
