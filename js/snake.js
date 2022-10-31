@@ -37,10 +37,6 @@ class Snake {
         //this.snakeControl[0].actualPos = 
     }
 
-    speedKm(){
-        return (40000/this.speed).toFixed(2);
-    }
-
     increaseSpeed(){
         this.stop();
         // Calcula nova velocidade
@@ -51,8 +47,6 @@ class Snake {
         } else {
             this.speed = MAX_SPEED;
         }
-
-        document.querySelector('div.pontuacao p#speed span').innerText = this.speedKm();
         this.start();
     }
 
@@ -86,6 +80,25 @@ class Snake {
 
     size(){
         return this.snakeControl.length;
+    }
+
+    nextMove(){
+        let nextPos = [ ...this.snakeControl[this.size() - 1].actualPos ];
+        switch (this.direction) {
+            case "right":
+                nextPos[1]++;
+                break;
+            case "left":
+                nextPos[1]--;
+                break;
+            case "up":
+                nextPos[0]--;
+                break;
+            case "down":
+                nextPos[0]++;
+                break;
+        }
+        return nextPos;
     }
 
     move(){
@@ -131,6 +144,11 @@ class Snake {
         }
     }
 
+    crash(){
+        this.snakeControl[this.size() - 1].background = '../assets/img/crash.png';
+        this.snakeControl[this.size() - 1].draw();
+    }
+
     start(){
         this.snakeMoving = setInterval( () => {
             try {
@@ -141,7 +159,7 @@ class Snake {
                 this.stop();
             }
         }, this.speed );
-        document.querySelector('div.pontuacao p#speed span').innerText = this.speedKm();
+        return this.speed;
     }
 
     stop(){

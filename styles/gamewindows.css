@@ -12,14 +12,65 @@
 .modal-content {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 10% auto;
-    width: 80%;
-    background-color: white;
+    /* width: 60%; */
+    /* height: auto; */
+    background-color: #F1EFDC;;
     z-index: 20;
     border-radius: 10px;
-    background: #ffffff;
     box-shadow:  9px 9px 4px 0px #76717182;
     padding: 10px;
+    font-family: 'Rye', cursive;
+}
+
+.modal-content div {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F1EFDC;
+}
+.modal-content h1{
+    text-align: center;
+    background-color: #42032C;
+    color: #F1EFDC;
+    width: 100%;
+}
+
+.modal-content h2 {
+    text-align: center;
+    background-color: #42032C;
+    color: #F1EFDC;
+    padding: 1rem 0.5rem;
+}
+
+.modal-content p {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.modal-content select {
+    width: 60%;
+    text-align: center;
+    font-family: 'Rye', cursive;
+    padding: 1rem 0.5rem;
+    margin-top:24px;
+    margin-bottom: 24px;
+}
+
+.modal-content button {
+    text-align: center;
+    font-family: 'Rye', cursive;
+    font-size: 2rem;
+    background-color: #D36B00;
+    color: #F1EFDC;
+    padding: 1rem 0.5rem;
+    width: 60%;
+    border-radius: 5px;
+    margin-bottom: 24px;
 }
 
 #button-pause{

@@ -1,5 +1,5 @@
 const BOARD_WIDTH = 8;
-const BOARD_COLOR = 'blue';
+const BOARD_COLOR = '#42032C';
 const TILE_SIZE = 32;
 const TILE_BORDER = 0;
 
