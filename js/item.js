@@ -9,7 +9,7 @@ class Item {
 
     draw(){
         this.position = document.getElementById(`${this.x}_${this.y}`);
-        console.log(this);
+        // console.log(this);
         this.position.className = "element-draw";
         this.position.querySelector('img').setAttribute("src", `${this.background}`);
     }

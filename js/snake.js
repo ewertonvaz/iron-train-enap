@@ -10,7 +10,7 @@ class Snake {
     constructor(x, y){    
         this.direction = "right";
         this.snakeControl = [];
-        this.speed = 2000;
+        this.speed = 1500;
         this.generate(x, y);
     }
 

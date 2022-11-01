@@ -41,7 +41,18 @@
 }
 
 #painel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 240px;
   padding: 4px;
+}
+
+#bot-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #botoes {
@@ -80,6 +91,20 @@
   transform: rotate(90deg);
 }
 
+#button-pause{
+  display: flex;
+  padding: 16px;
+  margin-left: 16px;
+  color: #F1EFDC;
+  background-color: #D36B00;
+  text-transform: uppercase;
+  justify-content: space-between;
+  align-items: center;
+}
+#button-pause svg{
+  width: 32px;
+}
+
 #score {
   display: flex;
   justify-content: center;
@@ -88,4 +113,30 @@
   border-radius: 4px;
   font-family: Arcade;
   font-size: 3rem;
+}
+
+#level {
+  display: flex;
+  flex-direction: row;
+  font-family: 'Rye', cursive;
+  justify-content: space-between;
+}
+
+#game-msg{
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  font-family: 'Rye', cursive;
+  font-size: 1.2rem;
+  color: #42032C;
+  background-color: #F1EFDC;
+  border: 1px solid #E6D2AA;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+#game-container {
+  position: relative;
 }

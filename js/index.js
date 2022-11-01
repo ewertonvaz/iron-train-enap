@@ -4,23 +4,40 @@ const SCORE_DIGITS = 4;
 let gameStatus = "waiting";
 var collisionTimerId = null;
 let score = 0;
+let level = 1;
 
 const board = new Board(8, 8);
 const snake = new Snake(Math.round(board.width / 2), Math.round(board.height / 2));
-let itens = addItens();
+let itens = [];
 
 function addItens(){
-    let qte = board.width / 2;
+    let qte = (board.width / 2) + (level * 2);
     let itens = [];
-    for (let i = 0; itens.length <= qte; i++){
+    for (let i = 0; itens.length < qte; i++){
         let x = getRandomInt(0, board.width);
         let y = getRandomInt(0, board.height);
-        if (! snake.checkCordinateConflict(x, y)){
-            let item = new Item(x, y);
-            itens.push(item);
+        if (!snake.checkCordinateConflict(x, y)){
+            let newIndex = chekItemExists(x, y, itens);
+            console.log(newIndex);
+            if ( newIndex === -1) { 
+                let item = new Item(x, y);
+                itens.push(item);
+            } else {
+                itens.splice(newIndex, 1);
+            }
         }
     }
     return itens;
+}
+
+function chekItemExists(x, y, arritens){
+    let found = -1;
+    arritens.forEach( (item, index) => {
+        if ( item.x === x && item.y === y) {
+            found = index;
+        }
+    });
+    return found;
 }
 
 function collisionBorder(nextPos){
@@ -41,6 +58,13 @@ function collisionItens(nextPos){
             score += el.points;
             itens.splice(index, 1);
             renderScore();
+            if (itens.length === 0){
+                levelUpGame();
+                speedUp();
+            }
+            if (score % 100 === 0){
+                speedUp();
+            }
         }
     });
 }
@@ -63,6 +87,16 @@ function detectCollision(){
         console.log(e);
         endGame();
     }
+}
+
+function levelUpGame(){
+    pauseGame();
+    level++;
+    document.querySelector('#level span').innerText = level;
+    itens = addItens();
+    snake.grow();
+    renderItens();
+    pauseGame();
 }
 
 function speedUp(){
@@ -97,7 +131,7 @@ function renderSpeed(speed) {
 }
 
 function speedToKm(speed){
-    return (40000/speed).toFixed(2);
+    return (40000/speed).toFixed(0);
 }
 
 function changeBoard(){
@@ -119,8 +153,8 @@ function changeBoard(){
 
     snake.changePosition(Math.round(board.width / 2), Math.round(board.height / 2));
 
-    board.render();
     itens = addItens();
+    board.render();
     renderItens();
     renderSpeed(snake.speed);
     renderScore();
@@ -131,6 +165,9 @@ function endGame(){
     clearInterval(collisionTimerId);
     snake.crash();
     snake.stop();
+    let msg = document.querySelector('#game-msg');
+    msg.innerHTML = `<p>Game Over</p> <p><strong>[F5]</strong> to restart!</p>`;
+    msg.style.display = 'flex';
 }
 
 function startGame(){
@@ -144,11 +181,15 @@ function startGame(){
 function pauseGame(){
     if (gameStatus !== "paused"){
         clearInterval(collisionTimerId);
-        document.getElementById("button-pause").innerText = "play"
+        document.getElementById("button-pause").innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+            </svg> play`;
         gameStatus = "paused";
         snake.stop();
     } else {
-        document.getElementById("button-pause").innerText = "pause"
+        document.getElementById("button-pause").innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+            </svg> pause`;
         gameStatus = "running";
         collisionTimerId = setInterval(() => {
             detectCollision();
@@ -160,7 +201,7 @@ function pauseGame(){
 document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', event => {
         const key = event.key.toLowerCase();
-        console.log(key);
+        // console.log(key);
         switch (key) {
             case 'arrowup':
                 snake.changeDirection('up')
@@ -187,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+itens = addItens();
 board.render();
 renderItens();
 renderSpeed(snake.speed);
