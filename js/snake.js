@@ -14,6 +14,18 @@ class Snake {
         this.generate(x, y);
     }
 
+    checkCordinateConflict(x, y) {
+        for ( let i = 0; i < this.snakeControl.length; i++){
+            if (
+                this.snakeControl[i].actualPos[0] === x &&
+                this.snakeControl[i].actualPos[1] === y
+            ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     generate(x, y){
         this.snakeControl.unshift(new Head(x, y));
         this.snakeControl.unshift( new Segment(x, y - 1));

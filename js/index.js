@@ -7,11 +7,21 @@ let score = 0;
 
 const board = new Board(8, 8);
 const snake = new Snake(Math.round(board.width / 2), Math.round(board.height / 2));
-const itens = [
-    new Item(6, 6),
-    new Item(2, 2)
-];
+let itens = addItens();
 
+function addItens(){
+    let qte = board.width / 2;
+    let itens = [];
+    for (let i = 0; itens.length <= qte; i++){
+        let x = getRandomInt(0, board.width);
+        let y = getRandomInt(0, board.height);
+        if (! snake.checkCordinateConflict(x, y)){
+            let item = new Item(x, y);
+            itens.push(item);
+        }
+    }
+    return itens;
+}
 
 function collisionBorder(nextPos){
     if( 
@@ -73,14 +83,12 @@ function renderItens(){
 function renderScore() {
     let strScore = score > 0 ? score.toFixed(0) : "0";
     let length = strScore.length;
-    console.log(strScore, strScore.length);
     if (strScore.length === SCORE_DIGITS){
         return strScore;
     }
     for (let i = 0; i <= SCORE_DIGITS - length; i++){
         strScore = '0' + strScore;
     }
-    console.log(strScore, strScore.length);
     document.querySelector('#score span').innerText = strScore;
 }
 
@@ -112,6 +120,7 @@ function changeBoard(){
     snake.changePosition(Math.round(board.width / 2), Math.round(board.height / 2));
 
     board.render();
+    itens = addItens();
     renderItens();
     renderSpeed(snake.speed);
     renderScore();
@@ -147,6 +156,36 @@ function pauseGame(){
         renderSpeed( snake.start() );
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('keydown', event => {
+        const key = event.key.toLowerCase();
+        console.log(key);
+        switch (key) {
+            case 'arrowup':
+                snake.changeDirection('up')
+                break;
+            case 'arrowdown':
+                snake.changeDirection('down')
+                break;
+            case 'arrowleft':
+                snake.changeDirection('left')
+                break;
+            case 'arrowright':
+                snake.changeDirection('right')
+                break;
+            default:
+                break;
+        }
+    });
+
+    document.addEventListener('keypress', event => {
+        const key = event.key.toLowerCase();
+        if (key === ' '){
+            pauseGame();
+        }
+    });
+});
 
 board.render();
 renderItens();
