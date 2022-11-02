@@ -122,19 +122,24 @@ class Head extends BodyPart {
 }
 
 class Tail extends BodyPart {
-    constructor(x, y) {
+    constructor(x, y, firstRender) {
         super(x, y);
         this.text = "T";
         this.background = "./assets/img/tail.png";
+        this.firstRender = firstRender;
     }
 
     draw(){
         super.draw();
-        if (!(this.actualPos[0] === this.previousPos[0] && this.actualPos[1] === this.previousPos[1])){
-            let previous = document.getElementById(`${this.previousPos[0]}_${this.previousPos[1]}`);
-            //previous.innerHTML = "" ;
-            previous.className = "square";
-            previous.querySelector('img').setAttribute("src", "");
+        if (!this.firstRender){
+            if (!(this.actualPos[0] === this.previousPos[0] && this.actualPos[1] === this.previousPos[1])){
+                let previous = document.getElementById(`${this.previousPos[0]}_${this.previousPos[1]}`);
+                //previous.innerHTML = "" ;
+                previous.className = "square";
+                previous.querySelector('img').setAttribute("src", "");
+            }
+        } else {
+            this.firstRender = false;
         }
     }
 }

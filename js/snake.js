@@ -29,7 +29,7 @@ class Snake {
     generate(x, y){
         this.snakeControl.unshift(new Head(x, y));
         this.snakeControl.unshift( new Segment(x, y - 1));
-        this.snakeControl.unshift(new Tail(x, y - 2));
+        this.snakeControl.unshift(new Tail(x, y - 2, true));
     }
 
     getSnake() {

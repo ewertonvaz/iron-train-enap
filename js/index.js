@@ -5,9 +5,9 @@ let gameStatus = "waiting";
 var collisionTimerId = null;
 let score = 0;
 let level = 1;
+let music = "on";
 const audioPlayer = new Audio();
 const musicPlayer = new Audio('./assets/sounds/JasonShaw-JENNYS-THEME.mp3');
-
 
 const board = new Board(8, 8);
 const snake = new Snake(Math.round(board.width / 2), Math.round(board.height / 2));
@@ -36,6 +36,7 @@ function chekItemExists(x, y, arritens){
     let found = -1;
     arritens.forEach( (item, index) => {
         if ( item.x === x && item.y === y) {
+            console.log(x, y, arritens);
             found = index;
         }
     });
@@ -214,7 +215,9 @@ function pauseGame(){
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
             </svg> play`;
         gameStatus = "paused";
-        musicPlayer.pause();
+        if (music === "on"){
+            musicPlayer.pause();
+        }
         snake.stop();
     } else {
         document.getElementById("button-pause").innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -224,8 +227,26 @@ function pauseGame(){
         collisionTimerId = setInterval(() => {
             detectCollision();
         }, snake.speed - 100);
-        musicPlayer.play();
+        if (music === "on"){
+            musicPlayer.play();
+        }
         renderSpeed( snake.start() );
+    }
+}
+
+function pauseMusic(){
+    if (music !== "off"){
+        document.getElementById("button-music").innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6l4.72-4.72a.75.75 0 011.28.531V19.94a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.395C2.806 8.757 3.63 8.25 4.51 8.25H6.75z" />
+        </svg>`;
+        music = "off";
+        musicPlayer.pause();
+    } else {
+        document.getElementById("button-music").innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+        </svg>`;
+        music = "on";
+        musicPlayer.play();
     }
 }
 
