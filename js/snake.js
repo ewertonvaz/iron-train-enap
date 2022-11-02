@@ -62,13 +62,13 @@ class Snake {
         this.start();
     }
 
-    changePosition(x, y) {
-        this.direction = "right";
-        for (let i = this.size() - 1;  i >= 0; i--) {
-            this.snakeControl[i].actualPos = [x, y - (this.size() - 1 - i)] 
-            this.snakeControl[i].previousPos = [x, y - (this.size() - i)];
-        }
-    }
+    // changePosition(x, y) {
+    //     this.direction = "right";
+    //     for (let i = this.size() - 1;  i >= 0; i--) {
+    //         this.snakeControl[i].actualPos = [x, y - (this.size() - 1 - i)] 
+    //         this.snakeControl[i].previousPos = [x, y - (this.size() - i)];
+    //     }
+    // }
 
     changeDirection(direction){
         switch (direction){

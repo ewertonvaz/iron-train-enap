@@ -1,16 +1,17 @@
 // const Board = require("./board");
 // const Snake = require("./snake");
-const SCORE_DIGITS = 4;
-let gameStatus = "waiting";
 var collisionTimerId = null;
+
+const SCORE_DIGITS = 4;
+const audioPlayer = new Audio();
+const musicPlayer = new Audio('./assets/sounds/JasonShaw-JENNYS-THEME.mp3');
+const board = new Board(8, 8);
+
+let gameStatus = "waiting";
 let score = 0;
 let level = 1;
 let music = "on";
-const audioPlayer = new Audio();
-const musicPlayer = new Audio('./assets/sounds/JasonShaw-JENNYS-THEME.mp3');
-
-const board = new Board(8, 8);
-const snake = new Snake(Math.round(board.width / 2), Math.round(board.height / 2));
+let snake = new Snake(Math.round(board.width / 2), Math.round(board.height / 2));
 let itens = [];
 
 function addItens(){
@@ -164,7 +165,7 @@ function changeBoard(){
             break;
     }
 
-    snake.changePosition(Math.round(board.width / 2), Math.round(board.height / 2));
+    snake = new Snake(Math.round(board.width / 2), Math.round(board.height / 2));
 
     itens = addItens();
     board.render();
