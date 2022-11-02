@@ -148,6 +148,14 @@
   padding: 16px;
 }
 
+.game-over{
+  opacity: 100%;
+}
+
+.game-level{
+  opacity: 40%;
+}
+
 #game-container {
   position: relative;
 }

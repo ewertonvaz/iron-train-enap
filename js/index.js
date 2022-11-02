@@ -96,10 +96,18 @@ function detectCollision(){
 function levelUpGame(){
     pauseGame();
     level++;
+    let msg = document.querySelector('#game-msg');
+    msg.innerHTML = `<h1>Level Up</h1> <p>Woah! You just passed to level <strong>${level}</strong> !</p>`;
+    msg.classList.add("game-level");
+    msg.style.display = 'flex';
     document.querySelector('#level span').innerText = level;
     itens = addItens();
     snake.grow();
     renderItens();
+    let levelUpTimer = setTimeout( () => {
+        msg.style.display = 'none';
+        clearTimeout(levelUpTimer);
+    }, 3000);
     pauseGame();
 }
 
@@ -174,11 +182,20 @@ function endGame(){
     snake.crash();
     snake.stop();
     let msg = document.querySelector('#game-msg');
-    msg.innerHTML = `<h1>Game Over</h1> <p><strong>[F5]</strong> to restart!</p>`;
+    msg.innerHTML = `<h1>Game Over</h1>
+     <p>You scored <strong>${score}</strong> points and reached level <strong>${level}</strong>!</p>
+     <p><strong>[F5]</strong> to play again!</p>`;
+    msg.classList.remove("game-level");
+    msg.classList.add("game-over");
     msg.style.display = 'flex';
+    document.querySelector('#painel').style.display = 'none';
+    document.removeEventListener("keydown", keyboardDown);
+    document.removeEventListener("keypress", keyboardPress);
 }
 
 function startGame(){
+    document.addEventListener('keydown', keyboardDown );
+    document.addEventListener('keypress', keyboardPress );
     document.querySelector('.modal-wrapper').style.display = 'none';
     musicPlayer.autoplay = true;
     musicPlayer.volume = 0.1;
@@ -212,35 +229,38 @@ function pauseGame(){
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('keydown', event => {
-        const key = event.key.toLowerCase();
-        // console.log(key);
-        switch (key) {
-            case 'arrowup':
-                snake.changeDirection('up')
-                break;
-            case 'arrowdown':
-                snake.changeDirection('down')
-                break;
-            case 'arrowleft':
-                snake.changeDirection('left')
-                break;
-            case 'arrowright':
-                snake.changeDirection('right')
-                break;
-            default:
-                break;
-        }
-    });
+function keyboardDown(event) {
+    const key = event.key.toLowerCase();
+    // console.log(key);
+    switch (key) {
+        case 'arrowup':
+            snake.changeDirection('up')
+            break;
+        case 'arrowdown':
+            snake.changeDirection('down')
+            break;
+        case 'arrowleft':
+            snake.changeDirection('left')
+            break;
+        case 'arrowright':
+            snake.changeDirection('right')
+            break;
+        default:
+            break;
+    }
+}
 
-    document.addEventListener('keypress', event => {
-        const key = event.key.toLowerCase();
-        if (key === ' '){
-            pauseGame();
-        }
-    });
-});
+function keyboardPress(event) {
+    const key = event.key.toLowerCase();
+    if (key === ' '){
+        pauseGame();
+    }
+}
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     document.addEventListener('keydown', keyboardDown );
+//     document.addEventListener('keypress', keyboardPress );
+// });
 
 itens = addItens();
 board.render();
