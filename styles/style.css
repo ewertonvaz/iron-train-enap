@@ -3,6 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Rye&display=swap');
 
 @font-face {
+  font-family: Display;
+  src: url('../assets/fonts/Open 24 Display St.ttf');
+}
+
+@font-face {
   font-family: Arcade;
   src: url('../assets/fonts/ARCADE.TTF');
 }
@@ -100,6 +105,7 @@
   text-transform: uppercase;
   justify-content: space-between;
   align-items: center;
+  font-family: 'Rye', cursive;
 }
 #button-pause svg{
   width: 32px;
@@ -111,8 +117,11 @@
   padding: 2px;
   border: 2px solid #42032C;
   border-radius: 4px;
-  font-family: Arcade;
+  font-family: Display;
   font-size: 3rem;
+  color: greenyellow;
+  background-color: black;
+  letter-spacing: 6px;
 }
 
 #level {
@@ -122,12 +131,14 @@
   justify-content: space-between;
 }
 
-#game-msg{
+#game-msg {
   display: none;
   flex-direction: column;
+  align-items: center;
   position: absolute;
   top: 50%;
-  left: 25%;
+  left: 12px;
+  min-width: 80%;
   font-family: 'Rye', cursive;
   font-size: 1.2rem;
   color: #42032C;

@@ -5,6 +5,9 @@ let gameStatus = "waiting";
 var collisionTimerId = null;
 let score = 0;
 let level = 1;
+const audioPlayer = new Audio();
+const musicPlayer = new Audio('./assets/sounds/JasonShaw-JENNYS-THEME.mp3');
+
 
 const board = new Board(8, 8);
 const snake = new Snake(Math.round(board.width / 2), Math.round(board.height / 2));
@@ -18,7 +21,6 @@ function addItens(){
         let y = getRandomInt(0, board.height);
         if (!snake.checkCordinateConflict(x, y)){
             let newIndex = chekItemExists(x, y, itens);
-            console.log(newIndex);
             if ( newIndex === -1) { 
                 let item = new Item(x, y);
                 itens.push(item);
@@ -55,6 +57,8 @@ function collisionBorder(nextPos){
 function collisionItens(nextPos){
     itens.forEach( (el, index) => {
         if( el.x === snake.getHead().actualPos[0] && el.y === snake.getHead().actualPos[1]) {
+            audioPlayer.setAttribute('src', el.sound);
+            audioPlayer.play();
             score += el.points;
             itens.splice(index, 1);
             renderScore();
@@ -163,15 +167,23 @@ function changeBoard(){
 
 function endGame(){
     clearInterval(collisionTimerId);
+    musicPlayer.pause();
+    musicPlayer.currentTime = 0;
+    audioPlayer.setAttribute('src', './assets/sounds/nukka.wav');
+    audioPlayer.play();
     snake.crash();
     snake.stop();
     let msg = document.querySelector('#game-msg');
-    msg.innerHTML = `<p>Game Over</p> <p><strong>[F5]</strong> to restart!</p>`;
+    msg.innerHTML = `<h1>Game Over</h1> <p><strong>[F5]</strong> to restart!</p>`;
     msg.style.display = 'flex';
 }
 
 function startGame(){
     document.querySelector('.modal-wrapper').style.display = 'none';
+    musicPlayer.autoplay = true;
+    musicPlayer.volume = 0.1;
+    musicPlayer.loop = true;
+    musicPlayer.load();
     collisionTimerId = setInterval(() => {
         detectCollision();
     }, snake.speed - 100);
@@ -185,6 +197,7 @@ function pauseGame(){
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
             </svg> play`;
         gameStatus = "paused";
+        musicPlayer.pause();
         snake.stop();
     } else {
         document.getElementById("button-pause").innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -194,6 +207,7 @@ function pauseGame(){
         collisionTimerId = setInterval(() => {
             detectCollision();
         }, snake.speed - 100);
+        musicPlayer.play();
         renderSpeed( snake.start() );
     }
 }

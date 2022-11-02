@@ -5,6 +5,7 @@ class Item {
         this.position = "";
         this.background = "./assets/img/coin.svg";
         this.points = 10;
+        this.sound = "./assets/sounds/cash-register.mp3";
     }
 
     draw(){
