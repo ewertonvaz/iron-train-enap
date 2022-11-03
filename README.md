@@ -10,7 +10,7 @@ Os **sprites** do trem e das moedas criados a partir de imagens obtidas na inter
 Outros assets (fontes, imagens, música e efeitos sonoros) são gratuitos para uso pessoal, sem fins lucrativos, e foram obtidos em sites na internet
 
 ## Projeto 1 
-O jogo foi criado como o Projeto 1 do treinamento web dev da Iron Hack.
+O jogo foi criado como o primeiro projeto do bootcamp Iron Hack Web Development - Full time - ENAP / 2022 - Turma 92 .
 
 ### link apresentação
 Para acessar o aquivo no Google Drive onde está a apresentação deste projeto clique neste link:
